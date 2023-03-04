@@ -10,6 +10,20 @@ export class AppController {
     return 'Hello NestJS';
   }
 
+  @Get('product')
+  getProducts(
+    @Query('limit') limit: number,
+    @Query('offset') offset: number,
+    @Query('brand') brand: string,
+  ) {
+    return `products limit=${limit} offset=${offset} brand : ${brand}`;
+  }
+
+  @Get('product/filter')
+  getProductFilter() {
+    return 'I am filter';
+  }
+
   @Get('product/:id')
   getProduct(@Param('id') id: string) {
     return `el producto que tu buscas tiene el numero ${id}`;
@@ -18,10 +32,5 @@ export class AppController {
   @Get('category/:id/product/:productId')
   getCategory(@Param('id') id: string, @Param() productId: string) {
     return `la categoria es ${id} y el id del producto es ${productId}`;
-  }
-
-  @Get('product')
-  getProducts(@Query('limit') limit, @Query() offset) {
-    return `products limit=${limit} offset=${offset}`;
   }
 }
