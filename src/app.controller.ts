@@ -7,6 +7,16 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return this.appService.getHello();
+    return 'Hello NestJS';
+  }
+
+  @Get('nuevo')
+  newEnpoint() {
+    return 'new controllers';
+  }
+
+  @Get('ruta')
+  nuevo() {
+    return 'otro controllers';
   }
 }
