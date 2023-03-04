@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -10,13 +10,18 @@ export class AppController {
     return 'Hello NestJS';
   }
 
-  @Get('nuevo')
-  newEnpoint() {
-    return 'new controllers';
+  @Get('product/:id')
+  getProduct(@Param('id') id: string) {
+    return `el producto que tu buscas tiene el numero ${id}`;
   }
 
-  @Get('ruta')
-  nuevo() {
-    return 'otro controllers';
+  @Get('category/:id/product/:productId')
+  getCategory(@Param('id') id: string, @Param() productId: string) {
+    return `la categoria es ${id} y el id del producto es ${productId}`;
+  }
+
+  @Get('product')
+  getProducts(@Query('limit') limit, @Query() offset) {
+    return `products limit=${limit} offset=${offset}`;
   }
 }
