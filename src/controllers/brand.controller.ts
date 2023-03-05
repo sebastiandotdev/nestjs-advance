@@ -24,7 +24,7 @@ export class BrandController {
   }
 
   @Put(':id')
-  update(@Param() id: number, @Body() playload) {
+  update(@Param('id') id: number, @Body() playload) {
     return {
       message: 'actulizando una marca',
       playload,
@@ -32,9 +32,17 @@ export class BrandController {
   }
 
   @Delete(':id')
-  delete(@Param() id: number) {
+  delete(@Param('id') id: number) {
     return {
       message: 'eliminando una marca',
+      id,
+    };
+  }
+
+  @Get(':id')
+  searchById(@Param('id') id: number) {
+    return {
+      message: 'Obteniendo una marca',
       id,
     };
   }
