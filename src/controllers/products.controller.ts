@@ -22,13 +22,6 @@ export class ProductsController {
     };
   }
 
-  @Get(':id')
-  getById(@Param('id') id: string) {
-    return {
-      message: `el producto que tu buscas tiene el numero ${id}`,
-    };
-  }
-
   @Post()
   create(@Body() body: Array<object>) {
     return {
@@ -50,6 +43,13 @@ export class ProductsController {
     return {
       message: 'eliminando producto',
       id,
+    };
+  }
+
+  @Get(':id')
+  getById(@Param('id') id: string) {
+    return {
+      message: `el producto que tu buscas tiene el numero ${id}`,
     };
   }
 }

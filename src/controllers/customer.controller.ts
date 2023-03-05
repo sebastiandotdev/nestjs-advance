@@ -37,4 +37,12 @@ export class CustomerController {
       id,
     };
   }
+
+  @Get(':id')
+  searchById(@Param('id') id: number) {
+    return {
+      message: 'Obteniendo un solo customer',
+      id,
+    };
+  }
 }
