@@ -34,7 +34,7 @@ export class OrderController {
   @Delete(':id')
   delete(@Param('id') id: number) {
     return {
-      message: 'eliminado un producto',
+      message: 'eliminado una orden',
       id,
     };
   }
