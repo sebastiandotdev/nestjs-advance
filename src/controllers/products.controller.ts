@@ -22,13 +22,6 @@ export class ProductsController {
     };
   }
 
-  @Get('filter')
-  getFilter() {
-    return {
-      message: 'I am filter',
-    };
-  }
-
   @Get(':id')
   getById(@Param('id') id: string) {
     return {
