@@ -31,11 +31,8 @@ export class ProductsController {
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number) {
-    return {
-      message: 'eliminando producto',
-      id,
-    };
+  delete(@Param('id') id: string) {
+    return this.productService.delete(parseInt(id));
   }
 
   @Get(':id')

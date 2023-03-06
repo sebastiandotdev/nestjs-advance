@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Product } from './productsDto/products.dto';
 
 @Injectable()
@@ -20,7 +20,11 @@ export class ProductsService {
   }
 
   findOne(id: number) {
-    return this.products.find((product) => product.id === id);
+    const product = this.products.find((product) => product.id === id);
+    if (!product) {
+      throw new NotFoundException('No encontre el producto ');
+    }
+    return product;
   }
 
   create(payload: any) {
@@ -47,7 +51,11 @@ export class ProductsService {
   }
 
   delete(id: number) {
-    const dlProduct = this.products.every((product) => product.id === id);
-    return dlProduct;
+    const index = this.products.findIndex((product) => product.id === id);
+    if (index === -1) {
+      throw new NotFoundException('el producto no existe');
+    }
+    this.products.slice(index, 1);
+    return true;
   }
 }
