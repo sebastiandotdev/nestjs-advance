@@ -1,7 +1,6 @@
 import {
   Controller,
   Get,
-  Query,
   Param,
   Post,
   Body,
@@ -10,34 +9,25 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
+import { ProductsService } from '../services/products.service';
 
 @Controller('products')
 export class ProductsController {
+  constructor(private productService: ProductsService) {}
+
   @Get()
-  getAll(
-    @Query('limit') limit: number,
-    @Query('offset') offset: number,
-    @Query('brand') brand: string,
-  ) {
-    return {
-      message: `products limit=${limit} offset=${offset} brand : ${brand}`,
-    };
+  getAll() {
+    return this.productService.findAll();
   }
 
   @Post()
-  create(@Body() body: Array<object>) {
-    return {
-      message: 'Creando un producto',
-      ...body,
-    };
+  create(@Body() body: any) {
+    return this.productService.create(body);
   }
 
   @Put(':id')
   update(@Param('id') id: number, @Body() payload: any) {
-    return {
-      id,
-      payload,
-    };
+    return this.productService.update(id, payload);
   }
 
   @Delete(':id')
@@ -51,8 +41,6 @@ export class ProductsController {
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   getById(@Param('id') id: string) {
-    return {
-      message: `el producto que tu buscas tiene el numero ${id}`,
-    };
+    return this.productService.findOne(parseInt(id));
   }
 }
